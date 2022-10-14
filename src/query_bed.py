@@ -50,12 +50,8 @@ def main() -> None:
         queryPositionEnd = int(tmp[2])
 
         for k in chrom:
-            if  queryPositionStart <= k.chrom_start < queryPositionEnd:
-                final_out.append(k)
-
-    # Output all relevant features
-    for i in final_out:
-        print_line(i, args.outfile)
+            if queryPositionStart <= k.chrom_start < queryPositionEnd:
+                print_line(k, args.outfile)
 
 
 if __name__ == '__main__':
