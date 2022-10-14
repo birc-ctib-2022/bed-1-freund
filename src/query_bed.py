@@ -41,7 +41,7 @@ def main() -> None:
 
     # Identify queries, get chromosomes that match the search query,
     # and exclude all entries that are outside the range of the query
-    final_out = []
+
     for j in queryFile:
         tmp = j.split("\t")
         chrom = toc.get_chrom(tmp[0])
