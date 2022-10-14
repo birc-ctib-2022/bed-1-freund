@@ -1,0 +1,21 @@
+How does your method for extracting features work?
+    The algorithm checks if the start position of the feature is between
+    the positions that have been given in the query. If this is the case,
+    the chromosome is printed to the user.
+
+What is the complexity of the algorithm, as a function of the size of the two 
+input files? 
+When you answer this, you need to know that you can get the list of chromosomes 
+from a query.Table in constant time, but it does, of course, take longer to run 
+through all the lines in it.
+    The file containing the chromosomes with their features has to be parsed,
+    and we have to run through the file containing the queries; 
+    assuming that the query table is accessed in constant time, we should 
+    get a complexity of O(n+m)
+
+Did you, at any point, exploit that our features are on single nucleotides and not larger regions?
+    I've tried to avoid this, and attempted to make the algorithm as general
+    as possible.
+
+If you did, what would it take to handle general regions?
+    N/A
