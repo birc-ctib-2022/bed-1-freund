@@ -8,6 +8,16 @@ from bed import (
     parse_line, print_line
 )
 
+def parser(inputFile):
+    outLines = []
+    lineBegin, lineEnd = 0, 0
+    for i, c in enumerate(inputFile):
+        if c == "\n":
+            lineEnd = i
+            outLines.append(parse_line(inputFile[lineBegin:lineEnd]))
+            lineBegin = i + 1
+    return outLines
+
 
 def main() -> None:
     """Run the program."""
@@ -28,8 +38,11 @@ def main() -> None:
     args = argparser.parse_args()
 
     # With all the options handled, we just need to do the real work
-    # FIXME: put your code here
 
+    fileRead = args.infile.read()
+    parsedLines = parser(fileRead)
+    for i in parsedLines:
+        print_line(i, args.outfile)
 
 if __name__ == '__main__':
     main()

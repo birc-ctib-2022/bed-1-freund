@@ -7,6 +7,7 @@ from bed import (
     parse_line, print_line
 )
 from query import Table
+from format_bed import parser
 
 
 def main() -> None:
@@ -27,7 +28,30 @@ def main() -> None:
     args = argparser.parse_args()
 
     # With all the options handled, we just need to do the real work
-    # FIXME: put your code here
+
+    # Load inputs and create BedLines, which will be added to a searchable table
+    queryFile = args.query.readlines()
+    bedFile = args.bed.read()
+    parsedFiles = parser(bedFile)
+
+    # Create table and load BedLines into it
+    toc = Table()
+    for i in parsedFiles:
+        toc.add_line(i)
+
+    # Identify queries, get chromosomes that match the search query,
+    # and exclude all entries that are outside the range of the query
+
+    for j in queryFile:
+        tmp = j.split("\t")
+        chrom = toc.get_chrom(tmp[0])
+
+        queryPositionStart = int(tmp[1])
+        queryPositionEnd = int(tmp[2])
+
+        for k in chrom:
+            if queryPositionStart <= k.chrom_start < queryPositionEnd:
+                print_line(k, args.outfile)
 
 
 if __name__ == '__main__':
